@@ -9,11 +9,9 @@ export function* signIn({ payload }) {
   try {
     const { id } = payload;
 
-    const response = yield call(api.get, 'students', {
-      id,
-    });
+    const response = yield call(api.get, `students/${id}`);
 
-    const { student } = response.data;
+    const student = response.data;
 
     if (!student) {
       Alert.alert('Erro no login', 'O ID informado não foi encontrado');
