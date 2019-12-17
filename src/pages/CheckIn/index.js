@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '~/services/api';
@@ -9,24 +10,43 @@ import Checkin from '~/components/Checkin';
 import { Container, SubmitButton, List } from './styles';
 
 export default function CheckIn() {
+  const [checkins, setCheckins] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const { id } = useSelector(state => state.auth.student);
 
-  const [checkins, setCheckins] = useState([]);
+  const loadCheckins = useCallback(async () => {
+    setLoading(true);
+    const response = await api.get(`/students/${id}/checkins`);
+
+    setCheckins(response.data);
+    setLoading(false);
+  }, [id]);
 
   useEffect(() => {
-    async function loadChekins() {
-      const response = await api.get(`/students/${id}/checkins`);
+    loadCheckins();
+  }, [id, loadCheckins]);
 
-      setCheckins(response.data);
+  async function handleCheckIn() {
+    try {
+      await api.post(`/students/${id}/checkins`);
+
+      loadCheckins();
+    } catch (err) {
+      Alert.alert(
+        'Falha no checkin',
+        (err.response && err.response.data.error) || 'Tente novamente'
+      );
     }
-    loadChekins();
-  }, [id]);
+  }
 
   return (
     <>
       <Header />
       <Container>
-        <SubmitButton onPress={() => {}}>Novo check-in</SubmitButton>
+        <SubmitButton loading={loading} onPress={handleCheckIn}>
+          Novo check-in
+        </SubmitButton>
 
         <List
           data={checkins}
