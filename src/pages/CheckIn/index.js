@@ -29,6 +29,7 @@ export default function CheckIn() {
 
   async function handleCheckIn() {
     try {
+      setLoading(true);
       await api.post(`/students/${id}/checkins`);
 
       loadCheckins();
@@ -38,6 +39,7 @@ export default function CheckIn() {
         (err.response && err.response.data.error) || 'Tente novamente'
       );
     }
+    setLoading(false);
   }
 
   return (
