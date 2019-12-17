@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '~/services/api';
 
@@ -7,9 +8,20 @@ import Checkin from '~/components/Checkin';
 
 import { Container, SubmitButton, List } from './styles';
 
-const data = [1, 2, 3, 4, 5];
-
 export default function CheckIn() {
+  const { id } = useSelector(state => state.auth.student);
+
+  const [checkins, setCheckins] = useState([]);
+
+  useEffect(() => {
+    async function loadChekins() {
+      const response = await api.get(`/students/${id}/checkins`);
+
+      setCheckins(response.data);
+    }
+    loadChekins();
+  }, [id]);
+
   return (
     <>
       <Header />
@@ -17,8 +29,8 @@ export default function CheckIn() {
         <SubmitButton onPress={() => {}}>Novo check-in</SubmitButton>
 
         <List
-          data={data}
-          keyExtractor={item => String(item)}
+          data={checkins}
+          keyExtractor={item => String(item.id)}
           renderItem={({ item }) => <Checkin data={item} />}
         />
       </Container>

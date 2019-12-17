@@ -19,7 +19,7 @@ export const Number = styled.Text`
   color: #444;
 `;
 
-export const Date = styled.Text`
+export const Info = styled.Text`
   font-size: 14px;
   color: #666;
 `;
