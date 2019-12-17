@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import api from '~/services/api';
 
 import Header from '~/components/Header';
@@ -62,7 +64,6 @@ export default function CheckIn() {
 
 CheckIn.navigationOptions = {
   tabBarLabel: 'Check-ins',
-  // eslint-disable-next-line react/prop-types
   tabBarIcon: ({ tintColor }) => (
     <Icon name="edit-location" size={20} color={tintColor} />
   ),
