@@ -1,3 +1,17 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View``;
+import Button from '~/components/Button';
+
+export const Container = styled.View`
+  flex: 1;
+  background-color: #f5f5f5;
+  padding: 0 25px;
+`;
+
+export const SubmitButton = styled(Button)`
+  margin-top: 20px;
+`;
+
+export const CheckInList = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+})``;
