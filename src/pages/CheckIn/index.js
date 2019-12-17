@@ -1,9 +1,13 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import api from '~/services/api';
 
 import Header from '~/components/Header';
+import Checkin from '~/components/Checkin';
 
-import { Container, SubmitButton, CheckInList } from './styles';
+import { Container, SubmitButton, List } from './styles';
+
+const data = [1, 2, 3, 4, 5];
 
 export default function CheckIn() {
   return (
@@ -12,7 +16,11 @@ export default function CheckIn() {
       <Container>
         <SubmitButton onPress={() => {}}>Novo check-in</SubmitButton>
 
-        <CheckInList />
+        <List
+          data={data}
+          keyExtractor={item => String(item)}
+          renderItem={({ item }) => <Checkin data={item} />}
+        />
       </Container>
     </>
   );

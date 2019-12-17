@@ -12,6 +12,7 @@ export const SubmitButton = styled(Button)`
   margin-top: 20px;
 `;
 
-export const CheckInList = styled.FlatList.attrs({
+export const List = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
+  contentContainerStyle: { marginTop: 20 },
 })``;
