@@ -18,11 +18,9 @@ export default function CheckIn() {
   const { id } = useSelector(state => state.auth.student);
 
   const loadCheckins = useCallback(async () => {
-    setLoading(true);
     const response = await api.get(`/students/${id}/checkins`);
 
     setCheckins(response.data);
-    setLoading(false);
   }, [id]);
 
   useEffect(() => {

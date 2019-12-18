@@ -24,7 +24,6 @@ export default function Checkin({ data }) {
 Checkin.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number,
-    dateParsed: PropTypes.string,
     created_at: PropTypes.string,
   }).isRequired,
 };
