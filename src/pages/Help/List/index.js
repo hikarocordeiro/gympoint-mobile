@@ -39,11 +39,11 @@ function List({ navigation, isFocused }) {
         <QuestionList
           data={questions}
           keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => (
+          renderItem={({ item: question }) => (
             <TouchableOpacity
-              onPress={() => navigation.navigate('Show', { questions })}
+              onPress={() => navigation.navigate('Show', { question })}
             >
-              <Question data={item} />
+              <Question data={question} />
             </TouchableOpacity>
           )}
         />
